@@ -1,0 +1,16 @@
+{
+  "name": "md2img",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "bin": "bin/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "cac": "^6.7.11",
+    "marked": "^3.0.7",
+    "ora": "^5.4.1",
+    "puppeteer": "^10.4.0"
+  },
+  "devDependencies": {
+    "cosmiconfig": "^7.0.1"
+  }
+}

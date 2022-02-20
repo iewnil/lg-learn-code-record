@@ -1,0 +1,9 @@
+/* @import url('./style2.css'); */
+
+div {
+  width: 200px;
+  height: 200px;
+  background-color: red;
+  /* background-image: url('../images/photo1.jpg'); */
+  background-size: 50px 50px;
+}

@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "transSass": "sass scss/main.scss css/style.css --watch",
+    "serve": "browser-sync ./ --files \"css/*.css\"",
+    "start": "run-p transSass serve"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.5",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.38.0"
+  }
+}

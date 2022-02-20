@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模块化演变（第二阶段）</title>
+</head>
+<body>
+  <h1>模块化演变（第二阶段）</h1>
+  <h2>基于文件划分+暴露对象的模块化方式</h2>
+  <script src="module-a.js"></script>
+  <script src="module-b.js"></script>
+
+  <script>
+    // 解决了命名重复问题
+    moduleA.method1();
+    moduleB.method1();
+
+    // 但是模块成员还是可以被修改
+    moduleA.name = 'foo';
+  </script>
+</body> 
+</html>

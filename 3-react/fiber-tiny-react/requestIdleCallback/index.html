@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      padding: 20px;
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <button id="btn1">执行计算</button>
+  <button id="btn2">更改背景颜色</button>
+  <script>
+    let box = document.getElementById('box');
+    let btn1 = document.getElementById('btn1');
+    let btn2 = document.getElementById('btn2');
+    let number = 99999;
+    let val = 0;
+
+    function calc(deadline) {
+      // 判断浏览器是否有空余时间，有则进行计算
+      while(number > 0 && deadline.timeRemaining() > 1) {
+        value  = Math.random() < 0.5 ? Math.random() : Math.random();
+        console.log(value);
+        number--;
+      }
+      // 浏览器没有空余时间则停止计算任务
+      // 停止后，尝试再次启动任务
+      if(number > 0) {
+        // 疑问：为什么是在这里进行重启？这样算不算递归？借助递归进行循环？
+        requestIdleCallback(calc)
+      }
+    }
+
+    btn1.onclick = function() {
+      requestIdleCallback(calc);
+    }
+
+    btn2.onclick = function() {
+      box.style.background = 'blue';
+    }
+
+  </script>
+</body>
+</html>

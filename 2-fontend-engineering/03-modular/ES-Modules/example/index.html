@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 通过给 script 标签添加 type="module" 属性
+    就可以在里面使用 ES Module 的定义/载入语法了 -->
+  <script src="module-a.js" type="module"></script>
+
+  <!-- 特性 -->
+  <!-- 1. 自动采用严格模式（'use strict'）-->
+  <!-- <script type="module">
+    console.log(this); // => undefined
+  </script> -->
+
+  <!-- 2. 每一个script 代表一个模块，都是运行在单独的作用域中 -->
+  <!-- <script type="module">
+    var foo = 100;
+    console.log(foo); // => 100
+  </script>
+  <script type="module">
+    console.log(foo); // => undefined;
+  </script> -->
+</body>
+</html>

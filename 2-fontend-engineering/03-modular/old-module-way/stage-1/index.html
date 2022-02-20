@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模块化演变（第一阶段）</title>
+</head>
+<body>
+  <h1>模块化演变（第一阶段）</h1>
+  <h2>基于文件划分的模块化方式</h2>
+  <script src="module-a.js"></script>
+  <script src="module-b.js"></script>
+
+  <script>
+    // 命名冲突
+    method1();
+
+    // 模块成员可以被修改
+    name = 'foo';
+
+    // 问题：
+    // 污染全局作用域
+    // 命名冲突问题
+    // 无法管理模块依赖关系
+  </script>
+</body> 
+</html>
