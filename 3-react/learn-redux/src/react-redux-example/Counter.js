@@ -66,7 +66,7 @@ const Counter = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  count: state.count,
+  count: state.counter.count,
 })
 
 // bindActionCreators 写法，自动帮我们绑定 dispatch 与 action 对象
