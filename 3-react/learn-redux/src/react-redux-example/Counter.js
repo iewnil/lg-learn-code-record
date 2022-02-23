@@ -54,11 +54,13 @@ const Counter = (props) => {
     count,
     increment,
     decrement,
+    increment_async,
   } = props;
 
   return (
     <div>
       <button onClick={() => increment()}>+</button>
+      <button onClick={() => increment_async()}>async +</button>
       <span>{count}</span>
       <button onClick={() => decrement()}>-</button>
     </div>
