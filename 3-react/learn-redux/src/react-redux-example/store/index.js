@@ -1,11 +1,7 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import logger from '../middlewares/logger';
 import thunk from '../middlewares/thunk';
-import counterReducer from '../reducers/Counter.reducer';
-
-const rootReducer = combineReducers({
-  counter: counterReducer
-})
+import rootReducer from '../reducers';
 
 const middlewares = applyMiddleware(logger, thunk);
 
