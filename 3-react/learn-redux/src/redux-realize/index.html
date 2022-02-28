@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="increment">+</button>
+  <span id="box">0</span>
+  <button id="decrement">-</button>
+  <script src="./index.js"></script>
+  <script src="./middlewares/logger.js"></script>
+  <script src="./middlewares/thunk.js"></script>
+  <script>
+    /**
+     *  常规用法
+     */
+    // function reducer (state, action) {
+    //   switch(action.type) {
+    //     case 'increment':
+    //       return state + 1;
+    //     case 'decrement':
+    //       return state - 1;
+    //     default:
+    //       return state;
+    //   }
+    // }
+    // 创建 store
+    // var store = createStore(reducer, 0);
+    // document.getElementById('increment').onclick = function () {
+    //   store.dispatch({type: 'increment'});
+    // }
+
+    // document.getElementById('decrement').onclick = function () {
+    //   store.dispatch({type: 'decrement'});
+    // }
+
+    // store.subscribe(function () {
+    //   document.getElementById('box').innerHTML = store.getState();
+    // })
+
+    /**
+     * 介绍 enhancer
+     */ 
+    // function reducer (state, action) {
+    //   switch(action.type) {
+    //     case 'increment':
+    //       return state + 1;
+    //     case 'decrement':
+    //       return state - 1;
+    //     default:
+    //       return state;
+    //   }
+    // }
+
+    // 作用：返回一个增强后的 createStore 函数
+    // function enhancer (createStore) {
+    //   return function (reducer, preloadedState) {
+    //     var store = createStore(reducer, preloadedState);
+    //     var dispatch = store.dispatch;
+
+    //     // 增强 dispatch，有点thunk中间件的感觉
+    //     function _dispatch (action) {
+    //       if(typeof action === 'function') {
+    //         return action(dispatch);
+    //       }
+    //       dispatch(action); 
+    //     }
+    //     return {
+    //       ...store,
+    //       dispatch: _dispatch
+    //     }
+    //   }
+    // }
+
+    // var store = createStore(reducer, 0);
+    // document.getElementById('increment').onclick = function () {
+    //   store.dispatch({type: 'increment'});
+    // }
+
+    // document.getElementById('decrement').onclick = function () {
+    //   // 测试 enhancer
+    //   store.dispatch(function (dispatch) {
+    //     setTimeout(function () {
+    //       dispatch({type: 'decrement'});
+    //     }, 1000)
+    //   });
+    // }
+
+    // store.subscribe(function () {
+    //   document.getElementById('box').innerHTML = store.getState();
+    // })
+
+    /**
+     *  使用 applyMiddleware 引入 中间件
+     */
+    // function reducer (state, action) {
+    //   switch(action.type) {
+    //     case 'increment':
+    //       return state + 1;
+    //     case 'decrement':
+    //       return state - 1;
+    //     default:
+    //       return state;
+    //   }
+    // }
+    // 使用中间件
+    // var store = createStore(reducer, 0, applyMiddleware(logger, thunk))
+
+    // document.getElementById('increment').onclick = function () {
+    //   store.dispatch({type: 'increment'});
+    // }
+
+    // document.getElementById('decrement').onclick = function () {
+    //   store.dispatch({type: 'decrement'});
+    // }
+
+    // store.subscribe(function () {
+    //   document.getElementById('box').innerHTML = store.getState();
+    // })
+
+    /**
+     *  使用 bindActionsCreators，简化 mapDispatchToProps 定义，自动帮我们绑定 dispatch 与 action 对象
+     */
+    // function reducer (state, action) {
+    //   switch(action.type) {
+    //     case 'increment':
+    //       return state + 1;
+    //     case 'decrement':
+    //       return state - 1;
+    //     default:
+    //       return state;
+    //   }
+    // }
+
+    // function increment () {
+    //   return {type: 'increment'};
+    // }
+
+    // function decrement () {
+    //   return {type: 'decrement'};
+    // }
+
+
+    // // 使用中间件
+    // var store = createStore(reducer, 0, applyMiddleware(logger, thunk))
+
+    // const actions = bindActionCreators({ increment, decrement }, store.dispatch);
+
+    // document.getElementById('increment').onclick = function () {
+    //   actions.increment();
+    // }
+
+    // document.getElementById('decrement').onclick = function () {
+    //   actions.decrement();
+    // }
+
+    // store.subscribe(function () {
+    //   document.getElementById('box').innerHTML = store.getState();
+    // })
+
+
+    /**
+     *  使用 combineReducers，用于reducers独立拆分合并
+     */
+    function reducer (state, action) {
+      switch(action.type) {
+        case 'increment':
+          return state + 1;
+        case 'decrement':
+          return state - 1;
+        default:
+          return state;
+      }
+    }
+
+    function increment () {
+      return {type: 'increment'};
+    }
+
+    function decrement () {
+      return {type: 'decrement'};
+    }
+
+
+    // 使用中间件
+    var store = createStore(combineReducers({counter: reducer}), { counter: 0 }, applyMiddleware(logger, thunk))
+
+    const actions = bindActionCreators({ increment, decrement }, store.dispatch);
+
+    document.getElementById('increment').onclick = function () {
+      actions.increment();
+    }
+
+    document.getElementById('decrement').onclick = function () {
+      actions.decrement();
+    }
+
+    store.subscribe(function () {
+      document.getElementById('box').innerHTML = store.getState().counter;
+    })
+
+
+  </script>
+</body>
+</html>

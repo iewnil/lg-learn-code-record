@@ -71,7 +71,7 @@ const mapStateToProps = (state) => ({
   count: state.counter.count,
 })
 
-// bindActionCreators 写法，自动帮我们绑定 dispatch 与 action 对象
+// bindActionCreators 写法，简化 mapDispatchToProps 定义，自动帮我们绑定 dispatch 与 action 对象
 const mapDispatchToProps = (dispatch) => bindActionCreators(actionCreators, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
