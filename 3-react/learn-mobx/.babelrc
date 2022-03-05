@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators", // 使 vscode 不报错
+      {
+        "legacy": true
+      }
+    ]
+  ]
+}
