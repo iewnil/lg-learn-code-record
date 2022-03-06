@@ -45,19 +45,21 @@ class CounterStore {
   //   this.count = this.count - 1;
   // }
 
-  // @action getUsers = async () => {
-  //   let { data } = await axios.get('https://api.github.com/users');
-  //   // this.users = data; // 异步 action 中，是不被允许这样直接赋值的
-  //   runInAction(() => {
-  //     this.users = data;
-  //   })
-  // }
+  // 异步方法是不能作为 action 用来改变数据，所以只能通过 runInAction 包裹一个新的 action 函数，将改变数据的操作放入函数中
+  getUsers = async () => {
+    let { data } = await axios.get('https://api.github.com/users');
+    // this.users = data; // 异步 action 中，是不被允许这样直接赋值的
+    // 通过 runInAction 包裹一个新的 action 函数，将改变数据的操作放入函数中
+    runInAction(() => {
+      this.users = data;
+    })
+  }
 
   // 箭头函数不支持 generator，所以这里需要通过 bind 进行绑定 this（但好像不绑定也可以？？？）
-  getUsers = flow(function *() {
-    let { data } = yield axios.get('https://api.github.com/users');
-    this.users = data; // 通过 flow 包裹后，在异步 action 中就允许这样直接赋值了
-  }).bind(this)
+  // getUsers = flow(function *() {
+  //   let { data } = yield axios.get('https://api.github.com/users');
+  //   this.users = data; // 通过 flow 包裹后，在异步方法中就允许这样直接赋值了
+  // }).bind(this)
 
   // 通过 get 指定后，使用 getTotal 时，就不用加()
   @computed get getTotal() {
